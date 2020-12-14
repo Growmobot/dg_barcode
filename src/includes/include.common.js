@@ -19,8 +19,8 @@
 }*/
 
 
-// Return a scan result.
-dg_barcode.scan = function (codeType) {
+// Return a scan result, and run the action.
+dg_barcode.scan = function (action, codeType) {
 
   // Assure we are in compiled mode only.
   if (dg.settings.mode ==='phonegap') {
@@ -37,20 +37,21 @@ dg_barcode.scan = function (codeType) {
 
           // If matching type of code.
           if (result.format === codeType) {
-            // Populate the value specified in textElementID.
-            return result.text;
+
+            // Run an action with the result text.
+            return action(result.text);
           }
           // Wrong type of barcode.
           else {
             console.log('This is not a ' + codeType + ' type bar code.');
-            alert('This is not a ' + codeType + ' type bar code.');
+            //alert('This is not a ' + codeType + ' type bar code.');
           }
         }
 
         // Otherwise, accept any code.
         else {
-          // Populate the value specified in textElementID.
-          return result.text;
+          // Run an action with the result text.
+          return action(result.text);
         }
 
         // Console out result.
@@ -60,7 +61,7 @@ dg_barcode.scan = function (codeType) {
       // Error.
       function (error) {
         console.log("Scanning failed: " + error);
-        alert("Scanning failed: " + error);
+        //alert("Scanning failed: " + error);
       }
 
     );
@@ -70,7 +71,7 @@ dg_barcode.scan = function (codeType) {
   // Not compiled mode.
   else {
     console.log('DrupalGap is configured to compiled mode.');
-    alert('DrupalGap is configured to compiled mode.');
+    //alert('DrupalGap is configured to compiled mode.');
   }
 
 
@@ -101,7 +102,7 @@ dg_barcode.scanPopulate = function (textElementID, codeType) {
           // Wrong type of barcode.
           else {
             console.log('This is not a ' + codeType + ' type bar code.');
-            alert('This is not a ' + codeType + ' type bar code.');
+            //alert('This is not a ' + codeType + ' type bar code.');
           }
         }
 
@@ -118,7 +119,7 @@ dg_barcode.scanPopulate = function (textElementID, codeType) {
       // Error.
       function (error) {
         console.log("Scanning failed: " + error);
-        alert("Scanning failed: " + error);
+        //alert("Scanning failed: " + error);
       }
 
     );
@@ -128,7 +129,7 @@ dg_barcode.scanPopulate = function (textElementID, codeType) {
   // Not compiled mode.
   else {
     console.log('DrupalGap is configured to compiled mode.');
-    alert('DrupalGap is configured to compiled mode.');
+    //alert('DrupalGap is configured to compiled mode.');
   }
 }
 
